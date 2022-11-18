@@ -1,21 +1,44 @@
 namespace Shared
 
-open System
+type ContentType' = Tag | Attribute | Text
 
-type Todo = { Id: Guid; Description: string }
-
-module Todo =
-    let isValid (description: string) =
-        String.IsNullOrWhiteSpace description |> not
-
-    let create (description: string) =
-        { Id = Guid.NewGuid()
-          Description = description }
+type User' = {
+    Id: string
+    UserName: string
+    Sites: Site' list
+}
+and Site' = {
+    Id: int
+    DomainName: string
+    Pages: Page' list
+}
+and Page' = {
+    Id: int
+    SiteId: int
+    Uri: string
+    Title: string
+    Description: string
+    Keywords: seq<string>
+    Contents: Content' list
+}
+and Content' = {
+    Id: int
+    Position: int
+    Type: ContentType'
+    PageId: int option
+    Children: Content' list
+    ParentId: int option
+    Value: string option
+    Name: string
+    CssId: string option
+    CssClass: string option
+    IsTemplate: bool
+    IsEditable: bool
+}
 
 module Route =
     let builder typeName methodName =
         sprintf "/api/%s/%s" typeName methodName
 
 type ITodosApi =
-    { getTodos: unit -> Async<Todo list>
-      addTodo: Todo -> Async<Todo> }
+    { getUser: unit -> Async<User'> }

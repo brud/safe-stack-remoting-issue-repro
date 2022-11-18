@@ -26,19 +26,6 @@ const CONFIG = {
     }
 };
 
-const TEST_CONFIG = {
-    // The tags to include the generated JS and CSS will be automatically injected in the HTML template
-    // See https://github.com/jantimon/html-webpack-plugin
-    indexHtmlTemplate: 'tests/Client/index.html',
-    fsharpEntry: 'tests/Client/output/Client.Tests.js',
-    outputDir: 'tests/Client',
-    assetsDir: 'tests/Client',
-    devServerPort: 8081,
-    // When using webpack-dev-server, you may need to redirect some calls
-    // to a external API server. See https://webpack.js.org/configuration/dev-server/#devserver-proxy
-    devServerProxy: undefined,
-};
-
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -48,7 +35,7 @@ module.exports = function(env, arg) {
     // Mode is passed as a flag to npm run. see the docs for more details on flags https://webpack.js.org/api/cli/#flags
     const mode = arg.mode ?? 'development';
     // environment variables docs: https://webpack.js.org/api/cli/#environment-options
-    const config = env.test ? TEST_CONFIG : CONFIG;
+    const config = CONFIG;
     const isProduction = mode === 'production';
 
     console.log(`Bundling for ${env.test ? 'test' : 'run'} - ${mode} ...`);
