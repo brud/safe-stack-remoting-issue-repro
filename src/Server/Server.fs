@@ -64,6 +64,7 @@ let errorHandler (ex: Exception) (routeInfo: RouteInfo<HttpContext>) =
 let webApp =
     Remoting.createApi ()
     |> Remoting.withErrorHandler errorHandler
+    |> Remoting.withDiagnosticsLogger (printfn "%s")
     |> Remoting.withRouteBuilder Route.builder
     |> Remoting.fromValue todosApi
     |> Remoting.buildHttpHandler

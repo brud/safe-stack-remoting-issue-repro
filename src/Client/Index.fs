@@ -28,7 +28,6 @@ let update (msg: Msg) (model: Model) : Model * Cmd<Msg> =
     | GotUser user -> { model with User = Some user }, Cmd.none
 
 open Feliz
-open Feliz.Bulma
 
 let view (model: Model) (dispatch: Msg -> unit) =
     Interop.reactElement "div" []
