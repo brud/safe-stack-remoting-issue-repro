@@ -2,12 +2,6 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "paket": {
-      "version": "7.0.2",
-      "commands": [
-        "paket"
-      ]
-    },
     "fable": {
       "version": "4.0.0-theta-017",
       "commands": [
